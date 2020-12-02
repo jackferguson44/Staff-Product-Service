@@ -52,7 +52,8 @@ namespace StaffProductNew.Data
 
             modelBuilder.Entity<Product>()
                 .HasData(
-                           new Product { Id = 1, Ean = "not sure", CategoryId = 1, BrandId = 1, Name = "tasty chicken", Price = 5m, InStock = true, ExpectedRestock = new DateTime(2020, 12, 25, 10, 30, 50) }
+                           new Product { Id = 1, Ean = "not sure", CategoryId = 1, BrandId = 1, Name = "tasty chicken", Price = 5m, InStock = true, ExpectedRestock = new DateTime(2020, 12, 25, 10, 30, 50) },
+                           new Product { Id = 2, Ean = "not sure", CategoryId = 1, BrandId = 1, Name = "Chicken dumpling", Price = 12m, InStock = true, ExpectedRestock = new DateTime(2020, 12, 17, 10, 30, 50) }
                 );
 
             modelBuilder.Entity<CustomerStockOrder>()

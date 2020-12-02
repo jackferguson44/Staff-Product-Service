@@ -7,8 +7,8 @@ namespace StaffProductNew.Services
 {
     public interface IOrdersService
     {
-        Task<IEnumerable<OrderDto>> PostOrdersAsync();
+        Task<IEnumerable<OrderDto>> PutOrdersAsync();
 
-        Task<OrderDto> PostOrderAsync(int id);
+        Task<bool> PutOrderAsync(int id);
     }
 }

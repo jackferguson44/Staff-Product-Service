@@ -18,23 +18,38 @@ namespace StaffProductNew.Services
             client.DefaultRequestHeaders.Add("Accept", "application/json");
             _client = client;
         }
-        public async Task<OrderDto> PostOrderAsync(int id)
-        {
-            var response = await _client.GetAsync("api/orders/" + id);
-            if (response.StatusCode == HttpStatusCode.NotFound)
-            {
-                return null;
-            }
-            response.EnsureSuccessStatusCode();
-            var order = await response.Content.ReadAsAsync<OrderDto>();
-            return order;
-        }
+        //public async Task<OrderDto> PostOrderAsync(int id)
+        //{
+        //    var response = await _client.GetAsync("api/orders/" + id);
+        //    if (response.StatusCode == HttpStatusCode.NotFound)
+        //    {
+        //        return null;
+        //    }
+        //    response.EnsureSuccessStatusCode();
+        //    var order = await response.Content.ReadAsAsync<OrderDto>();
+        //    return order;
+        //}
 
-        public Task<IEnumerable<OrderDto>> PostOrdersAsync()
+        public Task<IEnumerable<OrderDto>> PutOrdersAsync()
         {
             var uri = "api/orders/";
             throw new NotImplementedException();
 
         }
+
+        public async Task<bool> PutOrderAsync(int id)
+        {
+
+            var response = await _client.GetAsync("api/orders/" + id);
+            if (response.StatusCode == HttpStatusCode.NotFound)
+            {
+                return false;
+            }
+            response.EnsureSuccessStatusCode();
+            var order = await response.Content.ReadAsAsync<OrderDto>();
+            return true;
+        }
+
+        
     }
 }

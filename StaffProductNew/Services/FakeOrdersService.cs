@@ -14,15 +14,17 @@ namespace StaffProductNew.Services
 
         };
 
-        public Task<OrderDto> PostOrderAsync(int id)
+
+        public Task<IEnumerable<OrderDto>> PutOrdersAsync()
         {
-            var order = _orders.FirstOrDefault(r => r.Id == id);
-            return Task.FromResult(order);
+            return null;
         }
 
-        public Task<IEnumerable<OrderDto>> PostOrdersAsync()
+        Task<bool> IOrdersService.PutOrderAsync(int id)
         {
-            throw new NotImplementedException();
+            var order = _orders.FirstOrDefault(r => r.Id == id);
+            // return Task.FromResult(order);
+            return null;
         }
     }
 }
