@@ -48,7 +48,7 @@ namespace StaffProductNew.Controllers
         }
 
         // GET: api/products/5
-        [HttpGet("All")]
+        [HttpGet("")]
         public async Task<ActionResult<IEnumerable<ProductModel>>> GetProducts()
         {
             var products = await _context.Products

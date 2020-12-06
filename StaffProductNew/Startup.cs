@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using StaffProductNew.Data;
 using StaffProductNew.Services;
+using StaffProductNew.Services.CustomerStockService;
 
 namespace StaffProductNew
 {
@@ -37,11 +38,11 @@ namespace StaffProductNew
             services.AddMvc();
             if(_env.IsDevelopment())
             {
-                services.AddTransient<IOrdersService, FakeOrdersService>();
+                services.AddTransient<IStockService, FakeStockService>();
             }
             else
             {
-                services.AddHttpClient<IOrdersService, OrdersService>();
+                services.AddHttpClient<IStockService, StockService>();
             }
         }
 
