@@ -38,10 +38,10 @@ namespace StaffProductNew.Repository
             return product;
         }
 
-        public Product GetProduct(int Id)
-        {
-            return _productsList.FirstOrDefault(p => p.Id == Id);
-        }
+        //public Product GetProduct(int Id)
+        //{
+        //    return _productsList.FirstOrDefault(p => p.Id == Id);
+        //}
 
         //public IEnumerable<Product> GetProducts()
         //{
@@ -61,6 +61,12 @@ namespace StaffProductNew.Repository
         public async Task<IEnumerable<Product>> GetProducts()
         {
             return await Task.FromResult(_productsList);
+        }
+
+        public async Task<Product> GetProduct(int Id)
+        {
+            return await Task.FromResult(_productsList.FirstOrDefault(p => p.Id == Id));
+            //throw new NotImplementedException();
         }
     }
 }

@@ -13,7 +13,7 @@ namespace StaffProductNew.Repository
 
         Task <IEnumerable<Product>> GetProducts();
 
-        Product GetProduct(int Id);
+        Task<Product> GetProduct(int Id);
 
         Product Add(Product product);
 

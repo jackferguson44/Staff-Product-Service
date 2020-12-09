@@ -27,9 +27,9 @@ namespace StaffProductNew.Controllers
 
         // GET: api/products/5
         [HttpGet("{id}")]
-        public ActionResult<ProductModel> GetProduct(int Id)
+        public async  Task<IActionResult>GetProduct(int Id)
         {
-            var product = _productRepository.GetProduct(Id);
+            var product = await _productRepository.GetProduct(Id);
             if (product == null)
             {
                 return NotFound();

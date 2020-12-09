@@ -34,10 +34,10 @@ namespace StaffProductNew.Repository
             return product;
         }
 
-        public Product GetProduct(int Id)
-        {
-           return _context.Products.Find(Id);
-        }
+        //public Product GetProduct(int Id)
+        //{
+        //   return _context.Products.Find(Id);
+        //}
 
         //public IEnumerable<Product> GetProducts()
         //{
@@ -56,6 +56,13 @@ namespace StaffProductNew.Repository
         {
             return await Task.FromResult(_context.Products);
            
+        }
+
+
+        public async Task<Product> GetProduct(int Id)
+        {
+            return await Task.FromResult(_context.Products.Find(Id));
+            throw new NotImplementedException();
         }
 
         //public Product GetProduct(int id)
