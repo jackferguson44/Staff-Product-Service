@@ -34,7 +34,7 @@ namespace StaffProductNew
         {
             services.AddControllers();
 
-            services.AddDbContext<StaffProductDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("StaffProductContext")));
+            services.AddDbContext<StaffProductDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("StaffProductConfig")));
 
             services.AddMvc();
             if(_env.IsDevelopment())
