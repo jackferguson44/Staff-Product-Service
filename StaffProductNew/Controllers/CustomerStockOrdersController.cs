@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using Microsoft.Extensions.Logging;
 using StaffProductNew.Services.CustomerStockService;
+using StaffProductNew.Repository;
 
 namespace StaffProductNew.Controllers
 {
@@ -16,12 +17,14 @@ namespace StaffProductNew.Controllers
     {
         private readonly ILogger _logger;
         private readonly IStockService _stockService;
+        //Repo stuff
 
         public CustomerStockOrdersController(ILogger<CustomerStockOrdersController> logger, IStockService stockService)
         {
             _logger = logger;
             _stockService = stockService;
         }
+
 
         // GET: api/stocks/5
         [HttpGet("{id}")]
@@ -44,6 +47,11 @@ namespace StaffProductNew.Controllers
             return Ok(stocks);
         }
 
+        //public async Task<IActionResult> UpdateStock()
+        //{
+
+        //    return Ok;
+        //}
 
 
     }

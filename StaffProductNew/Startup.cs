@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using StaffProductNew.Data;
 using StaffProductNew.Services;
 using StaffProductNew.Services.CustomerStockService;
+using StaffProductNew.Repository;
 
 namespace StaffProductNew
 {
@@ -39,11 +40,15 @@ namespace StaffProductNew
             if(_env.IsDevelopment())
             {
                 services.AddTransient<IStockService, FakeStockService>();
+                services.AddSingleton<IProductRepository, MockProductRespository>();
             }
             else
             {
                 services.AddHttpClient<IStockService, StockService>();
+                services.AddHttpClient<IProductRepository, ProductRepository>();
             }
+
+            //services.AddTransient<IProductRepository, ProductRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

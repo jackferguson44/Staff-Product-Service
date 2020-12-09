@@ -11,12 +11,12 @@ namespace StaffProductNew.Services.CustomerStockService
     {
         private readonly StockDto[] _stock =
         {
-            new StockDto { Id = 1, ProductId = 1, Quantity = 2, ProductName = "Cheese"},
-            new StockDto { Id = 2, ProductId = 2, Quantity = 3, ProductName = "Chipotle"}
+            new StockDto { ProductId = 1, Quantity = 2, ProductName = "Cheese"},
+            new StockDto { ProductId = 2, Quantity = 3, ProductName = "Chipotle"}
         };
         public Task<StockDto> GetStockAsync(int id)
         {
-            var stock = _stock.FirstOrDefault(s => s.Id == id);
+            var stock = _stock.FirstOrDefault(s => s.ProductId == id);
             return Task.FromResult(stock);
         }
 

@@ -17,5 +17,7 @@ namespace StaffProductNew.Data
         public decimal Price { get; set; }
         public Boolean InStock { get; set; }
         public DateTime ExpectedRestock { get; set; }
+
+        public int Stock { get; set; }
     }
 }

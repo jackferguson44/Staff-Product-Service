@@ -10,6 +10,12 @@ namespace StaffProductNew.Data
     {
         public DbSet<Product> Products { get; set; }
 
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<Brand> Brands { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
+
         public StaffProductDbContext(DbContextOptions<StaffProductDbContext> options)
             : base(options)
         {
@@ -52,8 +58,8 @@ namespace StaffProductNew.Data
 
             modelBuilder.Entity<Product>()
                 .HasData(
-                           new Product { Id = 1, Ean = "not sure", CategoryId = 1, BrandId = 1, Name = "tasty chicken", Price = 5m, InStock = true, ExpectedRestock = new DateTime(2020, 12, 25, 10, 30, 50) },
-                           new Product { Id = 2, Ean = "not sure", CategoryId = 1, BrandId = 1, Name = "Chicken dumpling", Price = 12m, InStock = true, ExpectedRestock = new DateTime(2020, 12, 17, 10, 30, 50) }
+                           new Product { Id = 1, Ean = "not sure", CategoryId = 1, BrandId = 1, Name = "tasty chicken", Price = 5m, InStock = true, ExpectedRestock = new DateTime(2020, 12, 25, 10, 30, 50), Stock = 12 },
+                           new Product { Id = 2, Ean = "not sure", CategoryId = 1, BrandId = 1, Name = "Chicken dumpling", Price = 12m, InStock = true, ExpectedRestock = new DateTime(2020, 12, 17, 10, 30, 50), Stock = 38 }
                 );
 
             modelBuilder.Entity<CustomerStockOrder>()
