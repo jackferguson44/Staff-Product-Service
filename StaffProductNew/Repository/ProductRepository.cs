@@ -44,12 +44,12 @@ namespace StaffProductNew.Repository
         //    return _context.Products;
         //}
 
-        public Product Update(Product productChanges)
+        public async Task<Product> Update(Product productChanges)
         {
             var product = _context.Products.Attach(productChanges);
             product.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             _context.SaveChanges();
-            return productChanges;
+            return await Task.FromResult(productChanges);
         }
 
         public async Task<IEnumerable<Product>> GetProducts()
@@ -62,7 +62,7 @@ namespace StaffProductNew.Repository
         public async Task<Product> GetProduct(int Id)
         {
             return await Task.FromResult(_context.Products.Find(Id));
-            throw new NotImplementedException();
+           // throw new NotImplementedException();
         }
 
         //public Product GetProduct(int id)

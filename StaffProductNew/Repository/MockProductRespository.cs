@@ -48,14 +48,14 @@ namespace StaffProductNew.Repository
         //    return _productsList;
         //}
 
-        public Product Update(Product productChanges)
+        public async Task<Product> Update(Product productChanges)
         {
             Product product = _productsList.FirstOrDefault(p => p.Id == productChanges.Id);
-            if (product != null)
+            if (product != null && product.Stock != 0)
             {
                 product.Stock = product.Stock - productChanges.Stock;
             }
-            return product;
+            return await Task.FromResult(product);
         }
 
         public async Task<IEnumerable<Product>> GetProducts()
