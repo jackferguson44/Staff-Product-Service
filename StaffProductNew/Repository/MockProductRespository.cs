@@ -17,8 +17,8 @@ namespace StaffProductNew.Repository
         {
             _productsList = new List<Product>()
             {
-                new Product() {Id = 3, Ean = "unsure", CategoryId = 1, BrandId = 1, Name = "curry", Price = 4.44m, InStock = true, ExpectedRestock = new DateTime(2020, 12, 25, 10, 30, 50), Stock = 12},
-                new Product() {Id = 4, Ean = "adsa", CategoryId = 2, BrandId = 2, Name = "chip", Price = 4.48m, InStock = true, ExpectedRestock = new DateTime(2020, 12, 25, 10, 30, 50), Stock = 15}
+                new Product() {Id = 1, Ean = "unsure", CategoryId = 1, BrandId = 1, Name = "curry", Price = 4.44m, InStock = true, ExpectedRestock = new DateTime(2020, 12, 25, 10, 30, 50), Stock = 12},
+                new Product() {Id = 2, Ean = "adsa", CategoryId = 2, BrandId = 2, Name = "chip", Price = 4.48m, InStock = true, ExpectedRestock = new DateTime(2020, 12, 25, 10, 30, 50), Stock = 15}
             };
         }
         public Product Add(Product product)
@@ -38,16 +38,7 @@ namespace StaffProductNew.Repository
             return product;
         }
 
-        //public Product GetProduct(int Id)
-        //{
-        //    return _productsList.FirstOrDefault(p => p.Id == Id);
-        //}
-
-        //public IEnumerable<Product> GetProducts()
-        //{
-        //    return _productsList;
-        //}
-
+        //Update this
         public async Task<Product> Update(Product productChanges)
         {
             Product product = _productsList.FirstOrDefault(p => p.Id == productChanges.Id);
@@ -67,6 +58,16 @@ namespace StaffProductNew.Repository
         {
             return await Task.FromResult(_productsList.FirstOrDefault(p => p.Id == Id));
             //throw new NotImplementedException();
+        }
+
+        public async Task<Product> UpdateStock(Product productChanges)
+        {
+            Product product = _productsList.FirstOrDefault(p => p.Id == productChanges.Id);
+            if (product != null && product.Stock != 0)
+            {
+                product.Stock = product.Stock - productChanges.Stock;
+            }
+            return await Task.FromResult(product);
         }
     }
 }

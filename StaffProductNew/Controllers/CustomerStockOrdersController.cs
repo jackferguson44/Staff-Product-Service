@@ -18,15 +18,15 @@ namespace StaffProductNew.Controllers
     {
         private readonly ILogger _logger;
         private readonly IStockService _stockService;
-        private readonly IProductRepository _productRepository;
+        //private readonly ProductRepository _productRepository;
         //Repo stuff
 
         public CustomerStockOrdersController(ILogger<CustomerStockOrdersController> logger, IStockService stockService
-            , IProductRepository productRepository)
+            ) //ProductRepository productRepository)
         {
             _logger = logger;
             _stockService = stockService;
-            _productRepository = productRepository;
+           // _productRepository = productRepository;
         }
 
 
@@ -51,12 +51,12 @@ namespace StaffProductNew.Controllers
             return Ok(stocks);
         }
 
-        [HttpPost("Update")]
-        public async Task<IActionResult> UpdateStock(Product product)
-        {
-            var updateStock = await _productRepository.Update(product);
-            return Ok(updateStock);
-        }
+        //[HttpPost]
+        //public async Task<IActionResult> UpdateStock(Product product)
+        //{
+        //    var updateStock = await _productRepository.Update(product);
+        //    return Ok(updateStock);
+        //}
 
       
 

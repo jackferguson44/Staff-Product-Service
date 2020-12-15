@@ -19,6 +19,8 @@ namespace StaffProductNew.Repository
 
         Task<Product> Update(Product product);
 
+        Task<Product> UpdateStock(St product);
+
         Product Delete(int Id);
 
         

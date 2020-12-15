@@ -15,6 +15,7 @@ using StaffProductNew.Data;
 using StaffProductNew.Services;
 using StaffProductNew.Services.CustomerStockService;
 using StaffProductNew.Repository;
+using Microsoft.AspNetCore.Http;
 
 namespace StaffProductNew
 {
@@ -33,6 +34,13 @@ namespace StaffProductNew
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
 
             services.AddDbContext<StaffProductDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("StaffProductConfig")));
 
