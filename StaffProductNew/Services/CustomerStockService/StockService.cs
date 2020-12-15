@@ -12,13 +12,13 @@ namespace StaffProductNew.Services.CustomerStockService
     {
         private readonly HttpClient _client;
         private readonly IProductRepository _productRepo;
-        public StockService(IProductRepository productRepository)
+        public StockService(HttpClient client)
         {
-            //client.BaseAddress = new System.Uri("http://localhost:44357");
-            //client.Timeout = TimeSpan.FromSeconds(5);
-            //client.DefaultRequestHeaders.Add("Accept", "application/json");
-            //_client = client;
-            _productRepo = productRepository;
+            client.BaseAddress = new System.Uri("http://localhost:44357");
+            client.Timeout = TimeSpan.FromSeconds(5);
+            client.DefaultRequestHeaders.Add("Accept", "application/json");
+            _client = client;
+            //_productRepo = productRepository;
         }
 
 
@@ -37,17 +37,17 @@ namespace StaffProductNew.Services.CustomerStockService
 
         public async Task<IEnumerable<StockDto>> GetStocksAsync()
         {
-            //var uri = "api/stocks";
+            var uri = "api/stocks";
 
-            //var response = await _client.GetAsync(uri);
-            ////if (response.StatusCode == HttpStatusCode.NotFound)
-            ////{
-            ////    return null;
-            ////}
-            //response.EnsureSuccessStatusCode();
-            //var orders = await response.Content.ReadAsAsync<IEnumerable<StockDto>>();
-            //return orders;
-            return (IEnumerable<StockDto>)await _productRepo.GetProducts();
+            var response = await _client.GetAsync(uri);
+            //if (response.StatusCode == HttpStatusCode.NotFound)
+            //{
+            //    return null;
+            //}
+            response.EnsureSuccessStatusCode();
+            var orders = await response.Content.ReadAsAsync<IEnumerable<StockDto>>();
+            return orders;
+            // return (IEnumerable<StockDto>)await _productRepo.GetProducts();
 
         }
     }

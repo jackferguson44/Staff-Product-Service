@@ -19,7 +19,7 @@ namespace StaffProductNew.Repository
 
         Task<Product> Update(Product product);
 
-        Task<Product> UpdateStock(St product);
+        Task<Product> UpdateStock (Product product);
 
         Product Delete(int Id);
 

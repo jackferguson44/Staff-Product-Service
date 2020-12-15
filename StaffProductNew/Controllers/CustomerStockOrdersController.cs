@@ -22,11 +22,11 @@ namespace StaffProductNew.Controllers
         //Repo stuff
 
         public CustomerStockOrdersController(ILogger<CustomerStockOrdersController> logger, IStockService stockService
-            ) //ProductRepository productRepository)
+            )//,//ProductRepository productRepository)
         {
             _logger = logger;
             _stockService = stockService;
-           // _productRepository = productRepository;
+            //_productRepository = productRepository;
         }
 
 
