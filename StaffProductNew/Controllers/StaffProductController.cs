@@ -50,7 +50,6 @@ namespace StaffProductNew.Controllers
         [HttpPut("{id:int}")]
         public async Task<ActionResult<Product>> UpdateProduct(Product product)
         {
-            
             return await _productRepository.Update(product);
         }
 

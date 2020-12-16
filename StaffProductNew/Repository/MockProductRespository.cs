@@ -1,5 +1,6 @@
 ﻿using StaffProductNew.Data;
 using StaffProductNew.Models;
+using StaffProductNew.Services.CustomerStockService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,7 +45,7 @@ namespace StaffProductNew.Repository
             Product product = _productsList.FirstOrDefault(p => p.Id == productChanges.Id);
             if (product != null && product.Stock != 0)
             {
-                product.Stock = product.Stock - productChanges.Stock;
+                product.Stock = product.Stock + productChanges.Stock;
             }
             return await Task.FromResult(product);
         }
@@ -60,12 +61,14 @@ namespace StaffProductNew.Repository
             //throw new NotImplementedException();
         }
 
-        public async Task<Product> UpdateStock(Product productChanges)
+
+
+        public async Task<Product> UpdateStock(StockDto stockChanges)
         {
-            Product product = _productsList.FirstOrDefault(p => p.Id == productChanges.Id);
+            Product product = _productsList.FirstOrDefault(p => p.Id == stockChanges.ProductId);
             if (product != null && product.Stock != 0)
             {
-                product.Stock = product.Stock - productChanges.Stock;
+                product.Stock = product.Stock - stockChanges.StockAmount;
             }
             return await Task.FromResult(product);
         }

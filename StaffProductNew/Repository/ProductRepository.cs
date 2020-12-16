@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StaffProductNew.Data;
 using StaffProductNew.Models;
+using StaffProductNew.Services.CustomerStockService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,16 +64,14 @@ namespace StaffProductNew.Repository
             //return await Task.FromResult(productChanges);
         }
 
-        public async Task<Product> UpdateStock(Product productChanges)
+        public async Task<Product> UpdateStock(StockDto StockChanges)
         {
-            var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == productChanges.Id);
-            product.Ean = product.Ean;
-            product.CategoryId = product.CategoryId;
-            product.Name = product.Name;
-            product.Price = product.Price;
-            product.InStock = product.InStock;
-            product.ExpectedRestock = product.ExpectedRestock;
-            product.Stock = product.Stock;
+            var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == StockChanges.ProductId);
+            product.Stock = product.Stock - StockChanges.StockAmount;
+            if(product.Stock == 0)
+            {
+                product.InStock = false;
+            }
             await _context.SaveChangesAsync();
             return product;
         }

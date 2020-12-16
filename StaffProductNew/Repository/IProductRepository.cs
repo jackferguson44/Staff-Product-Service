@@ -1,6 +1,7 @@
 ﻿
 using StaffProductNew.Data;
 using StaffProductNew.Models;
+using StaffProductNew.Services.CustomerStockService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace StaffProductNew.Repository
 
         Task<Product> Update(Product product);
 
-        Task<Product> UpdateStock (Product product);
+        Task<Product> UpdateStock (StockDto stockChanges);
 
         Product Delete(int Id);
 
