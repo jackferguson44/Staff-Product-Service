@@ -45,7 +45,23 @@ namespace StaffProductNew.Repository
             Product product = _productsList.FirstOrDefault(p => p.Id == productChanges.Id);
             if (product != null && product.Stock != 0)
             {
-                product.Stock = product.Stock + productChanges.Stock;
+                product.Ean = productChanges.Ean;
+                product.CategoryId = productChanges.CategoryId;
+                product.Name = productChanges.Name;
+                product.Price = productChanges.Price;
+                product.InStock = productChanges.InStock;
+                product.ExpectedRestock = productChanges.ExpectedRestock;
+                product.Stock = productChanges.Stock;
+            }
+            return await Task.FromResult(product);
+        }
+
+        public async Task<Product> UpdateStock(StockDto stockChanges)
+        {
+            Product product = _productsList.FirstOrDefault(p => p.Id == stockChanges.ProductId);
+            if (product != null && product.Stock != 0)
+            {
+                product.Stock = product.Stock - stockChanges.StockAmount;
             }
             return await Task.FromResult(product);
         }
@@ -63,14 +79,6 @@ namespace StaffProductNew.Repository
 
 
 
-        public async Task<Product> UpdateStock(StockDto stockChanges)
-        {
-            Product product = _productsList.FirstOrDefault(p => p.Id == stockChanges.ProductId);
-            if (product != null && product.Stock != 0)
-            {
-                product.Stock = product.Stock - stockChanges.StockAmount;
-            }
-            return await Task.FromResult(product);
-        }
+        
     }
 }

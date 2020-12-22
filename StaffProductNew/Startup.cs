@@ -16,6 +16,7 @@ using StaffProductNew.Services;
 using StaffProductNew.Services.CustomerStockService;
 using StaffProductNew.Repository;
 using Microsoft.AspNetCore.Http;
+using StaffProductNew.Services.ProductService;
 
 namespace StaffProductNew
 {
@@ -34,6 +35,8 @@ namespace StaffProductNew
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IProductRepository, ProductRepository>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -43,17 +46,21 @@ namespace StaffProductNew
             });
 
             services.AddDbContext<StaffProductDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("StaffProductConfig")));
-
+            
+            
             services.AddMvc();
             if(_env.IsDevelopment())
             {
-                services.AddTransient<IStockService, FakeStockService>();
+                services.AddSingleton<IStockService, FakeStockService>();
                 services.AddSingleton<IProductRepository, MockProductRespository>();
+                //services.AddScoped<IProductRepository, ProductRepository>();
+                //services.AddScoped<IProductService, ProductService>();
             }
             else
             {
                 services.AddHttpClient<IStockService, StockService>();
                 services.AddHttpClient<IProductRepository, ProductRepository>();
+                services.AddHttpClient<IProductService, ProductService>();
             }
 
             //services.AddTransient<IProductRepository, ProductRepository>();

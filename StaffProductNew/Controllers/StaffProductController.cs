@@ -5,6 +5,7 @@ using StaffProductNew.Data;
 using StaffProductNew.Models;
 using StaffProductNew.Repository;
 using StaffProductNew.Services;
+using StaffProductNew.Services.ProductService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,10 +19,12 @@ namespace StaffProductNew.Controllers
     {
         //private readonly StaffProductDbContext _context;
         private readonly IProductRepository _productRepository;
+        private readonly IProductService _productService;
 
-        public StaffProductController(IProductRepository productRepository)//StaffProductDbContext context)
+        public StaffProductController(IProductRepository productRepository, IProductService productService)//StaffProductDbContext context)
         {
             _productRepository = productRepository;
+            _productService = productService;
             //_context = context;
         }
 
@@ -29,7 +32,7 @@ namespace StaffProductNew.Controllers
         [HttpGet("{id}")]
         public async  Task<IActionResult>GetProduct(int Id)
         {
-            var product = await _productRepository.GetProduct(Id);
+            var product = await _productService.GetProductAsync(Id);
             if (product == null)
             {
                 return NotFound();
@@ -41,7 +44,7 @@ namespace StaffProductNew.Controllers
         [HttpGet("")]
         public async Task<IActionResult> GetProducts()
         {
-            var products = await _productRepository.GetProducts();
+            var products = await _productService.GetProductsAsync();
             return Ok(products);
         }
 
