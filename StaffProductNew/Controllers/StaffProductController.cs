@@ -30,6 +30,7 @@ namespace StaffProductNew.Controllers
 
         // GET: api/products/5
         [HttpGet("{id}")]
+
         public async  Task<IActionResult>GetProduct(int Id)
         {
             var product = await _productService.GetProductAsync(Id);

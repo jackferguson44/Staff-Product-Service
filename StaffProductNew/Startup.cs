@@ -18,6 +18,8 @@ using StaffProductNew.Repository;
 using Microsoft.AspNetCore.Http;
 using StaffProductNew.Services.ProductService;
 using Polly;
+using System.IdentityModel.Tokens.Jwt;
+//using Jw
 namespace StaffProductNew
 {
     public class Startup
@@ -38,6 +40,16 @@ namespace StaffProductNew
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IProductRepository, ProductRepository>();
 
+            // do not use Microsoft claim mapping == sticl with JWT names
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
+            services.AddAuthentication("Bearer")
+                    .AddJwtBearer("Bearer", options =>
+                    {
+                        options.Authority = "http://localhost:58377";
+                        options.Audience = "staff_product_api";
+                    });
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -54,6 +66,8 @@ namespace StaffProductNew
                 .AddTransientHttpErrorPolicy(p => p.OrResult(r => !r.IsSuccessStatusCode)
                     .WaitAndRetryAsync(3, retry => TimeSpan.FromSeconds(Math.Pow(2, retry))))
                         .AddTransientHttpErrorPolicy(p => p.CircuitBreakerAsync(3, TimeSpan.FromSeconds(30)));
+
+            
             
             services.AddMvc();
             if(_env.IsDevelopment())
@@ -69,6 +83,7 @@ namespace StaffProductNew
                 services.AddHttpClient<IProductRepository, ProductRepository>();
                 services.AddHttpClient<IProductService, ProductService>();
             }
+
 
             //services.AddTransient<IProductRepository, ProductRepository>();
         }
@@ -86,6 +101,9 @@ namespace StaffProductNew
             app.UseRouting();
 
             app.UseAuthorization();
+
+            // use auth middleware during HTTP requests
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {

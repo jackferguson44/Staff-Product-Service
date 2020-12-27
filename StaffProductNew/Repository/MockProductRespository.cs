@@ -19,7 +19,7 @@ namespace StaffProductNew.Repository
             _productsList = new List<Product>()
             {
                 new Product() {Id = 1, Ean = "unsure", CategoryId = 1, BrandId = 1, Name = "curry", Price = 4.44m, InStock = true, ExpectedRestock = new DateTime(2020, 12, 25, 10, 30, 50), Stock = 12},
-                new Product() {Id = 2, Ean = "adsa", CategoryId = 2, BrandId = 2, Name = "chip", Price = 4.48m, InStock = true, ExpectedRestock = new DateTime(2020, 12, 25, 10, 30, 50), Stock = 15}
+                new Product() {Id = 2, Ean = "adsa", CategoryId = 2, BrandId = 2, Name = "soda", Price = 4.48m, InStock = true, ExpectedRestock = new DateTime(2020, 12, 25, 10, 30, 50), Stock = 15}
             };
         }
         public Product Add(Product product)

@@ -10,8 +10,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StaffProductNew.Testing", "
 		{AB42AB9E-0D33-4D1B-A095-AB1478665521} = {AB42AB9E-0D33-4D1B-A095-AB1478665521}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyAuth", "..\MyAuth\MyAuth.csproj", "{965CE910-68FF-426E-B143-22F4E5A1DE8D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,10 +24,6 @@ Global
 		{7A05245A-7ABB-4932-A016-8610600BEB10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A05245A-7ABB-4932-A016-8610600BEB10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A05245A-7ABB-4932-A016-8610600BEB10}.Release|Any CPU.Build.0 = Release|Any CPU
-		{965CE910-68FF-426E-B143-22F4E5A1DE8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{965CE910-68FF-426E-B143-22F4E5A1DE8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{965CE910-68FF-426E-B143-22F4E5A1DE8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{965CE910-68FF-426E-B143-22F4E5A1DE8D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
