@@ -17,7 +17,7 @@ using StaffProductNew.Services.CustomerStockService;
 using StaffProductNew.Repository;
 using Microsoft.AspNetCore.Http;
 using StaffProductNew.Services.ProductService;
-
+using Polly;
 namespace StaffProductNew
 {
     public class Startup
@@ -45,8 +45,15 @@ namespace StaffProductNew
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<StaffProductDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("StaffProductConfig")));
-            
+            services.AddDbContext<StaffProductDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("StaffProductConfig"), optionsBuilder =>
+                {
+                    optionsBuilder.EnableRetryOnFailure(3, TimeSpan.FromSeconds(10), null);
+                }));
+
+            services.AddHttpClient("RetryAndBreak")
+                .AddTransientHttpErrorPolicy(p => p.OrResult(r => !r.IsSuccessStatusCode)
+                    .WaitAndRetryAsync(3, retry => TimeSpan.FromSeconds(Math.Pow(2, retry))))
+                        .AddTransientHttpErrorPolicy(p => p.CircuitBreakerAsync(3, TimeSpan.FromSeconds(30)));
             
             services.AddMvc();
             if(_env.IsDevelopment())
