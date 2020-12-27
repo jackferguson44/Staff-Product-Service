@@ -37,8 +37,8 @@ namespace StaffProductNew
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddScoped<IProductService, ProductService>();
-            services.AddScoped<IProductRepository, ProductRepository>();
+            //services.AddScoped<IProductService, ProductService>();
+            //services.AddScoped<IProductRepository, ProductRepository>();
 
             // do not use Microsoft claim mapping == sticl with JWT names
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
@@ -72,16 +72,24 @@ namespace StaffProductNew
             services.AddMvc();
             if(_env.IsDevelopment())
             {
+                services.AddScoped<IProductService, ProductService>();
+                services.AddScoped<IProductRepository, ProductRepository>();
+                //services.AddScoped<IStockService, StockService>();
                 services.AddSingleton<IStockService, FakeStockService>();
-                services.AddSingleton<IProductRepository, MockProductRespository>();
+                //services.AddSingleton<IProductRepository, MockProductRespository>();
+
+
                 //services.AddScoped<IProductRepository, ProductRepository>();
                 //services.AddScoped<IProductService, ProductService>();
             }
             else
             {
+                //services.AddScoped<IProductService, MockProductRespository>
+                services.AddScoped<IStockService, FakeStockService>();
+                services.AddScoped<IProductRepository, MockProductRespository>();
                 services.AddHttpClient<IStockService, StockService>();
-                services.AddHttpClient<IProductRepository, ProductRepository>();
-                services.AddHttpClient<IProductService, ProductService>();
+                //services.AddHttpClient<IProductRepository, ProductRepository>();
+                //services.AddHttpClient<IProductService, ProductService>();
             }
 
 
