@@ -46,7 +46,7 @@ namespace StaffProductNew
             services.AddAuthentication("Bearer")
                     .AddJwtBearer("Bearer", options =>
                     {
-                        options.Authority = "http://localhost:58377";
+                        options.Authority = "https://localhost:44357";
                         options.Audience = "staff_product_api";
                     });
 
