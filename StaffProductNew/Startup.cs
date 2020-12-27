@@ -34,6 +34,7 @@ namespace StaffProductNew
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+        [Obsolete]
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
@@ -69,7 +70,7 @@ namespace StaffProductNew
 
             
             
-            services.AddMvc();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             if(_env.IsDevelopment())
             {
                 services.AddScoped<IProductService, ProductService>();
@@ -87,7 +88,7 @@ namespace StaffProductNew
                 //services.AddScoped<IProductService, MockProductRespository>
                 services.AddScoped<IStockService, FakeStockService>();
                 services.AddScoped<IProductRepository, MockProductRespository>();
-                services.AddHttpClient<IStockService, StockService>();
+                ////services.AddHttpClient<IStockService, StockService>();
                 //services.AddHttpClient<IProductRepository, ProductRepository>();
                 //services.AddHttpClient<IProductService, ProductService>();
             }
