@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using StaffProductNew.Services.CustomerStockService;
 using StaffProductNew.Repository;
 using StaffProductNew.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace StaffProductNew.Controllers
 {
@@ -32,6 +33,7 @@ namespace StaffProductNew.Controllers
 
         // GET: api/stocks/5
         [HttpGet("{id}")]
+        //[Authorize]
         public async Task<ActionResult<StockDto>> GetStock(int Id)
         {
             var stock = await _stockService.GetStockAsync(Id);
@@ -44,6 +46,7 @@ namespace StaffProductNew.Controllers
 
         // GET: api/stocks
         [HttpGet("")]
+        //[Authorize]
         public async Task<ActionResult<IEnumerable<StockDto>>> GetStocks()
         {
             var stocks = await _stockService.GetStocksAsync();
@@ -53,6 +56,7 @@ namespace StaffProductNew.Controllers
 
         // PUT: api/stocks/1
         [HttpPut("{id:int}")]
+       // [Authorize]
         public async Task <ActionResult<Product>> UpdateStock(StockDto stockChange)
         {
             var product = await _productRepository.UpdateStock(stockChange);

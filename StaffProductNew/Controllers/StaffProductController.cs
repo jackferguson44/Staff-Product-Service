@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using StaffProductNew.Data;
@@ -30,7 +31,7 @@ namespace StaffProductNew.Controllers
 
         // GET: api/products/5
         [HttpGet("{id}")]
-
+        //[Authorize]
         public async  Task<IActionResult>GetProduct(int Id)
         {
             var product = await _productService.GetProductAsync(Id);
@@ -43,6 +44,7 @@ namespace StaffProductNew.Controllers
 
         // GET: api/products/5
         [HttpGet("")]
+        //[Authorize]
         public async Task<IActionResult> GetProducts()
         {
             var products = await _productService.GetProductsAsync();
@@ -52,6 +54,7 @@ namespace StaffProductNew.Controllers
 
         // PUT: api/products/1
         [HttpPut("{id:int}")]
+        //[Authorize]
         public async Task<ActionResult<Product>> UpdateProduct(Product product)
         {
             return await _productRepository.Update(product);
