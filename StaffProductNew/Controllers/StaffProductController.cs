@@ -34,6 +34,7 @@ namespace StaffProductNew.Controllers
         //[Authorize]
         public async  Task<IActionResult>GetProduct(int Id)
         {
+
             var product = await _productService.GetProductAsync(Id);
             if (product == null)
             {
@@ -54,7 +55,7 @@ namespace StaffProductNew.Controllers
 
         // PUT: api/products/1
         [HttpPut("{id:int}")]
-        //[Authorize]
+       // [Authorize]
         public async Task<ActionResult<Product>> UpdateProduct(Product product)
         {
             return await _productRepository.Update(product);

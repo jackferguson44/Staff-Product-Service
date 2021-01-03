@@ -37,7 +37,7 @@ namespace StaffProductNew
         [Obsolete]
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            //services.AddControllers();
             //services.AddScoped<IProductService, ProductService>();
             //services.AddScoped<IProductRepository, ProductRepository>();
 
@@ -48,7 +48,7 @@ namespace StaffProductNew
                     .AddJwtBearer("Bearer", options =>
                     {
                         options.Authority = "https://localhost:5099";
-                        options.Audience = "StafProductNew";
+                        options.Audience = "StaffProductNew";
                     });
 
             services.Configure<CookiePolicyOptions>(options =>
@@ -101,12 +101,12 @@ namespace StaffProductNew
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
