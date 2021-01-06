@@ -25,5 +25,10 @@ namespace StaffProductNew.Repository
         Product Delete(int Id);
 
         
+
+        //Sends purchase request
+        Task<Product> PurchaseRequest(PurchaseRequestDto purchaseRequest);
+
+
     }
 }

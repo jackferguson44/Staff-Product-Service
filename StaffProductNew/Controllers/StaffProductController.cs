@@ -16,6 +16,7 @@ namespace StaffProductNew.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class StaffProductController : ControllerBase
     {
         //private readonly StaffProductDbContext _context;
@@ -31,7 +32,6 @@ namespace StaffProductNew.Controllers
 
         // GET: api/products/5
         [HttpGet("{id}")]
-        //[Authorize]
         public async  Task<IActionResult>GetProduct(int Id)
         {
 
@@ -45,7 +45,6 @@ namespace StaffProductNew.Controllers
 
         // GET: api/products/5
         [HttpGet("")]
-        //[Authorize]
         public async Task<IActionResult> GetProducts()
         {
             var products = await _productService.GetProductsAsync();
@@ -55,7 +54,6 @@ namespace StaffProductNew.Controllers
 
         // PUT: api/products/1
         [HttpPut("{id:int}")]
-       // [Authorize]
         public async Task<ActionResult<Product>> UpdateProduct(Product product)
         {
             return await _productRepository.Update(product);

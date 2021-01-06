@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StaffProductNew.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace StaffProductNew.Services.CustomerStockService
 
         Task<IEnumerable<StockDto>> GetStocksAsync();
 
-        
+        Task<Product> UpdateStock(StockDto stockChanges);
         
     }
 }

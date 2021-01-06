@@ -60,16 +60,16 @@ namespace StaffProductNew.Controllers
         public async Task <ActionResult<Product>> UpdateStock(StockDto stockChange)
         {
             var product = await _productRepository.UpdateStock(stockChange);
+            await Update(product);
             return Ok(product);
         }
 
+        [HttpPost("{id:int}")]
+        public async Task<ActionResult<Product>> Update(Product product)
+        {
+            return await _productRepository.Update(product);
+        }
 
-
-        //public async Task<IActionResult> UpdateStock()
-        //{
-
-        //    return Ok;
-        //}
 
 
     }

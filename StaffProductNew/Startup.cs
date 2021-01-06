@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+//using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -34,14 +34,14 @@ namespace StaffProductNew
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        [Obsolete]
+        //[Obsolete]
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddControllers();
+            services.AddControllers();
             //services.AddScoped<IProductService, ProductService>();
             //services.AddScoped<IProductRepository, ProductRepository>();
 
-            // do not use Microsoft claim mapping == sticl with JWT names
+            // do not use Microsoft claim mapping == stick with JWT names
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
             services.AddAuthentication("Bearer")
@@ -68,9 +68,9 @@ namespace StaffProductNew
                     .WaitAndRetryAsync(3, retry => TimeSpan.FromSeconds(Math.Pow(2, retry))))
                         .AddTransientHttpErrorPolicy(p => p.CircuitBreakerAsync(3, TimeSpan.FromSeconds(30)));
 
-            
-            
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddRazorPages();
+           //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
             if(_env.IsDevelopment())
             {
                 services.AddScoped<IProductService, ProductService>();
@@ -86,12 +86,13 @@ namespace StaffProductNew
             else
             {
                 //services.AddScoped<IProductService, MockProductRespository>
-                services.AddScoped<IStockService, FakeStockService>();
-                services.AddScoped<IProductRepository, MockProductRespository>();
-                services.AddScoped<IProductService, ProductService>();
-                ////services.AddHttpClient<IStockService, StockService>();
-                //services.AddHttpClient<IProductRepository, ProductRepository>();
-                //services.AddHttpClient<IProductService, ProductService>();
+
+                //services.AddScoped<IStockService, FakeStockService>();
+                //services.AddScoped<IProductRepository, MockProductRespository>();
+                //services.AddScoped<IProductService, ProductService>();
+                services.AddHttpClient<IStockService, StockService>();
+                services.AddHttpClient<IProductRepository, ProductRepository>();
+                services.AddHttpClient<IProductService, ProductService>();
             }
 
 
@@ -101,24 +102,34 @@ namespace StaffProductNew
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //if (env.IsDevelopment())
-            //{
-            //    app.UseDeveloperExceptionPage();
-            //}
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                
+                app.UseHsts();
+            }
 
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
+            // use auth middleware during HTTP requests
+            app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
-            // use auth middleware during HTTP requests
-            app.UseAuthentication();
+            
+            //app.UseMvc();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
+          
+
         }
     }
 }

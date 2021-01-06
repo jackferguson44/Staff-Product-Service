@@ -10,7 +10,7 @@ namespace StaffProductNew.Services.CustomerStockService
         public int ProductId { get; set; }
         public int StockAmount { get; set; }
 
-        public string ProductName { get; set; }
+        
       
     }
 }

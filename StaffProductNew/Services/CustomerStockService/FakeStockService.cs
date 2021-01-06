@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StaffProductNew.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -11,8 +12,8 @@ namespace StaffProductNew.Services.CustomerStockService
     {
         private readonly StockDto[] _stock =
         {
-            new StockDto { ProductId = 1, StockAmount = 2, ProductName = "Cheese"},
-            new StockDto { ProductId = 2, StockAmount = 3, ProductName = "Chipotle"}
+            new StockDto { ProductId = 1, StockAmount = 2},
+            new StockDto { ProductId = 2, StockAmount = 3}
         };
         public Task<StockDto> GetStockAsync(int id)
         {
@@ -24,6 +25,11 @@ namespace StaffProductNew.Services.CustomerStockService
         {
             var stocks = _stock.AsEnumerable();
             return Task.FromResult(stocks);
+        }
+
+        public Task<Product> UpdateStock(StockDto stockChanges)
+        {
+            throw new NotImplementedException();
         }
     }
 }

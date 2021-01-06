@@ -1,4 +1,5 @@
-﻿using StaffProductNew.Repository;
+﻿using StaffProductNew.Data;
+using StaffProductNew.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,6 +50,22 @@ namespace StaffProductNew.Services.CustomerStockService
             return orders;
             // return (IEnumerable<StockDto>)await _productRepo.GetProducts();
 
+        }
+
+        public Task<Product> UpdateStock(StockDto stockChanges)
+        {
+            throw new NotImplementedException();
+            //var uri = "api/stocks";
+            //var response = await _client.GetAsync(uri);
+            //response.EnsureSuccessStatusCode();
+            //var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == StockChanges.ProductId);
+            //product.Stock = product.Stock - StockChanges.StockAmount;
+            //if (product.Stock == 0)
+            //{
+            //    product.InStock = false;
+            //}
+            //await _context.SaveChangesAsync();
+            //return product;
         }
     }
 }

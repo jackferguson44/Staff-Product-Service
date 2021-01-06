@@ -79,6 +79,21 @@ namespace StaffProductNew.Repository
 
 
 
-        
+        public async Task<Product> PurchaseRequest(PurchaseRequestDto purchaseRequest)
+        {
+            Product product = _productsList.FirstOrDefault(p => p.Id == purchaseRequest.Id);
+
+            //if (product != null && product.Stock != 0)
+            //{
+            //    product.Ean = productChanges.Ean;
+            //    product.CategoryId = productChanges.CategoryId;
+            //    product.Name = productChanges.Name;
+            //    product.Price = productChanges.Price;
+            //    product.InStock = productChanges.InStock;
+            //    product.ExpectedRestock = productChanges.ExpectedRestock;
+            //    product.Stock = productChanges.Stock;
+            //}
+            return await Task.FromResult(product);
+        }
     }
 }

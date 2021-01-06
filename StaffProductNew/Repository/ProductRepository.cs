@@ -71,7 +71,7 @@ namespace StaffProductNew.Repository
         public async Task<Product> UpdateStock(StockDto StockChanges)
         {
             var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == StockChanges.ProductId);
-            product.Stock = product.Stock + StockChanges.StockAmount;
+            product.Stock = product.Stock - StockChanges.StockAmount;
             if(product.Stock == 0)
             {
                 product.InStock = false;
@@ -113,7 +113,7 @@ namespace StaffProductNew.Repository
             try
             {
                 var product = await _context.Products.Where(p => p.Id == Id).FirstOrDefaultAsync();
-                _logger.LogInformation("SUCCES" + Id);
+                _logger.LogInformation("SUCCESS" + Id);
                 return product;
             }
             catch(Exception e)
@@ -125,9 +125,13 @@ namespace StaffProductNew.Repository
            // throw new NotImplementedException();
         }
 
-        
-
-       
-        
+        public async Task<Product> PurchaseRequest(PurchaseRequestDto purchaseRequest)
+        {
+            //try
+            //{
+            //    await _context.Products
+            //}
+            return null;
+        }
     }
 }
