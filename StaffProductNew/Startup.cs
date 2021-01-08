@@ -44,25 +44,25 @@ namespace StaffProductNew
             // do not use Microsoft claim mapping == stick with JWT names
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
-            if(_env.IsDevelopment())
-            {
-                services.AddAuthentication("Bearer")
-                    .AddJwtBearer("Bearer", options =>
-                    {
-                        options.Authority = "https://localhost:5099";
-                        options.Audience = "StaffProductNew";
-                    });
+            //if(_env.IsDevelopment())
+            //{
+            //    services.AddAuthentication("Bearer")
+            //        .AddJwtBearer("Bearer", options =>
+            //        {
+            //            options.Authority = "https://localhost:5099";
+            //            options.Audience = "StaffProductNew";
+            //        });
 
-            }
-            else
-            {
-                services.AddAuthentication("Bearer")
-                    .AddJwtBearer("Bearer", options =>
-                    {
-                        options.Authority = "https://staffproductservice.azurewebsites.net/";
-                        options.Audience = "staff_product_api";
-                    });
-            }
+            //}
+            //else
+            //{
+            //    services.AddAuthentication("Bearer")
+            //        .AddJwtBearer("Bearer", options =>
+            //        {
+            //            options.Authority = "https://staffproductservice.azurewebsites.net/";
+            //            options.Audience = "staff_product_api";
+            //        });
+            //}
 
             services.Configure<CookiePolicyOptions>(options =>
             {
