@@ -16,7 +16,7 @@ namespace StaffProductNew.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class StaffProductController : ControllerBase
     {
         //private readonly StaffProductDbContext _context;
