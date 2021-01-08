@@ -101,7 +101,7 @@ namespace StaffProductNew
                 //services.AddScoped<IProductService, MockProductRespository>
 
                 services.AddScoped<IStockService, FakeStockService>();
-                services.AddScoped<IProductRepository, MockProductRespository>();
+                services.AddScoped<IProductRepository, ProductRepository>();
                 services.AddScoped<IProductService, ProductService>();
                 //services.AddHttpClient<IStockService, StockService>();
                 //services.AddHttpClient<IProductRepository, ProductRepository>();
