@@ -68,14 +68,21 @@ namespace StaffProductNew.Repository
             //return await Task.FromResult(productChanges);
         }
 
-        public async Task<Product> UpdateStock(StockDto StockChanges)
+        public async Task<IEnumerable<Product>> UpdateStock(StockDto StockChanges)
         {
-            var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == StockChanges.ProductId);
-            product.Stock = product.Stock - StockChanges.StockAmount;
-            if(product.Stock == 0)
+            var product = _context.Products.Where(p => p.Id == StockChanges.ProductId);
+
+            foreach(var item in product)
             {
-                product.InStock = false;
+                item.Stock = item.Stock - StockChanges.StockAmount;
+
+                if (item.Stock == 0)
+                {
+                    item.InStock = false;
+                }
             }
+            
+            
             await _context.SaveChangesAsync();
             return product;
         }
@@ -133,5 +140,7 @@ namespace StaffProductNew.Repository
             //}
             return null;
         }
+
+        
     }
 }

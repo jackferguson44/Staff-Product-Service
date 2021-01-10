@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Http;
 using StaffProductNew.Services.ProductService;
 using Polly;
 using System.IdentityModel.Tokens.Jwt;
+using StaffProductNew.Services.CustomerOrderingService;
 //using Jw
 namespace StaffProductNew
 {
@@ -88,28 +89,16 @@ namespace StaffProductNew
             {
                 services.AddScoped<IProductService, ProductService>();
                 services.AddScoped<IProductRepository, ProductRepository>();
-                //services.AddScoped<IStockService, StockService>();
-                services.AddSingleton<IStockService, FakeStockService>();
-                //services.AddSingleton<IProductRepository, MockProductRespository>();
-
-
-                //services.AddScoped<IProductRepository, ProductRepository>();
-                //services.AddScoped<IProductService, ProductService>();
+                services.AddScoped<IStockService, FakeStockService>();
+                services.AddScoped<ICustomerProductService, FakeCustomerProductService>();
             }
             else
             {
-                //services.AddScoped<IProductService, MockProductRespository>
-
                 services.AddScoped<IStockService, StockService>();
                 services.AddScoped<IProductRepository, ProductRepository>();
                 services.AddScoped<IProductService, ProductService>();
-                //services.AddHttpClient<IStockService, StockService>();
-                //services.AddHttpClient<IProductRepository, ProductRepository>();
-                //services.AddHttpClient<IProductService, ProductService>();
+                services.AddScoped<ICustomerProductService, CustomerProductService>();
             }
-
-
-            //services.AddTransient<IProductRepository, ProductRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

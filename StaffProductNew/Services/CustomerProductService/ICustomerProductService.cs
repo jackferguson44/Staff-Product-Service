@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace StaffProductNew.Services.CustomerOrderingService
 {
-    public class FakeCustomerStockService : ICustomerStockService
+    public interface ICustomerProductService
     {
-        public Task<Product> UpdateStock(int id)
-        {
-            return null;
-        }
+        Task<IEnumerable<CustomerProductDto>> UpdateStock(IEnumerable<Product> productChanges);
     }
 }

@@ -10,6 +10,7 @@ using StaffProductNew.Services.CustomerStockService;
 using StaffProductNew.Repository;
 using StaffProductNew.Data;
 using Microsoft.AspNetCore.Authorization;
+using StaffProductNew.Services.CustomerOrderingService;
 
 namespace StaffProductNew.Controllers
 {
@@ -20,14 +21,16 @@ namespace StaffProductNew.Controllers
         private readonly ILogger _logger;
         private readonly IStockService _stockService;
         private readonly IProductRepository _productRepository;
+        private readonly ICustomerProductService _customerProductService;
         //Repo stuff
 
         public CustomerStockOrdersController(ILogger<CustomerStockOrdersController> logger, IStockService stockService,
-            IProductRepository productRepository)
+            IProductRepository productRepository, ICustomerProductService customerProductService)
         {
             _logger = logger;
             _stockService = stockService;
             _productRepository = productRepository;
+            _customerProductService = customerProductService;
         }
 
 
@@ -37,11 +40,11 @@ namespace StaffProductNew.Controllers
         public async Task<ActionResult<StockDto>> GetStock(int Id)
         {
             var stock = await _stockService.GetStockAsync(Id);
-            if(stock == null)
+            if (stock == null)
             {
                 return NotFound();
             }
-            return Ok (stock);
+            return Ok(stock);
         }
 
         // GET: api/stocks
@@ -64,10 +67,11 @@ namespace StaffProductNew.Controllers
             return Ok(product);
         }
 
-        [HttpPost("{id:int}")]
-        public async Task<ActionResult<Product>> Update(Product product)
+     
+        [HttpPost("customerstockorders/{id:int}")]
+        public async Task<IEnumerable<CustomerProductDto>> Update(IEnumerable<Product> product)
         {
-            return await _productRepository.Update(product);
+            return await _customerProductService.UpdateStock(product);
         }
 
 
