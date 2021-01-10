@@ -64,6 +64,7 @@ namespace StaffProductNew.Controllers
         {
             var product = await _productRepository.UpdateStock(stockChange);
             await Update(product);
+            //for loop
             return Ok(product);
         }
 
