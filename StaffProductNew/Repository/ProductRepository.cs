@@ -86,7 +86,7 @@ namespace StaffProductNew.Repository
                     //}
                     if (product[x].Id.Equals(item.ProductId))
                     {
-                        product[x].Stock = product[x].Stock - item.StockAmount;
+                        product[x].Stock = product[x].Stock - item.Quantity;
                         if (product[x].Stock == 0)
                         {
                             product[x].InStock = false;

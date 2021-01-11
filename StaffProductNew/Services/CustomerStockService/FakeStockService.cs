@@ -12,8 +12,8 @@ namespace StaffProductNew.Services.CustomerStockService
     {
         private readonly StockDto[] _stock =
         {
-            new StockDto { ProductId = 1, StockAmount = 2},
-            new StockDto { ProductId = 2, StockAmount = 3}
+            new StockDto { ProductId = 1, Quantity = 2},
+            new StockDto { ProductId = 2, Quantity = 3}
         };
         public Task<StockDto> GetStockAsync(int id)
         {
