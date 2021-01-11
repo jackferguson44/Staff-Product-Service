@@ -8,6 +8,9 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using IdentityServer4;
+using IdentityModel;
+using IdentityModel.Client;
 
 namespace StaffProductNew.Services.CustomerOrderingService
 {
@@ -40,11 +43,22 @@ namespace StaffProductNew.Services.CustomerOrderingService
                 Price = p.Price
             }).ToList();
 
+
+            var disco = await client.GetDiscoveryDocumentAsync("https://customeroauththamco.azurewebsites.net");
+            var tokenResponse = await client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
+            {
+                Address = disco.TokenEndpoint,
+                ClientId = "staff_product_api",
+                ClientSecret = "eRRg%sR!231iHZ_Mq&G",
+                Scope = "customer_product_api"
+            });
+
+            client.SetBearerToken(tokenResponse.AccessToken);
             var postTask = client.PostAsJsonAsync("https://customerproductsthamco.azurewebsites.net/api/product/", product);
             postTask.Wait();
 
             var result = postTask.Result;
-
+            //
             if (result.IsSuccessStatusCode)
             {
                 return product;
