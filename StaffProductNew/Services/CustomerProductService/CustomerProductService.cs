@@ -44,7 +44,7 @@ namespace StaffProductNew.Services.CustomerOrderingService
             }).ToList();
 
 
-            var disco = await client.GetDiscoveryDocumentAsync("https://customeroauththamco.azurewebsites.net");
+            var disco = await client.GetDiscoveryDocumentAsync("https://staffauththamco.azurewebsites.net");
             var tokenResponse = await client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
             {
                 Address = disco.TokenEndpoint,
