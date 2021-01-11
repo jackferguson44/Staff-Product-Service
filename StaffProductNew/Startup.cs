@@ -84,7 +84,7 @@ namespace StaffProductNew
 
 
             services.AddRazorPages();
-           //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
+            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
             if(_env.IsDevelopment())
             {
                 services.AddScoped<IProductService, ProductService>();

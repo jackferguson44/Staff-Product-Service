@@ -69,7 +69,7 @@ namespace StaffProductNew.Controllers
         }
 
      
-        [HttpPost("customerstockorders/{id:int}")]
+        [HttpPost("")]
         public async Task<IEnumerable<CustomerProductDto>> Update(IEnumerable<Product> product)
         {
             return await _customerProductService.UpdateStock(product);
