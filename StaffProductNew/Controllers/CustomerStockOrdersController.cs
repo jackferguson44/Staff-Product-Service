@@ -60,7 +60,7 @@ namespace StaffProductNew.Controllers
         // PUT: api/stocks/1
         [HttpPut("{id:int}")]
        // [Authorize]
-        public async Task <ActionResult<Product>> UpdateStock(StockDto stockChange)
+        public async Task <ActionResult<Product>> UpdateStock(IEnumerable<StockDto> stockChange)
         {
             var product = await _productRepository.UpdateStock(stockChange);
             await Update(product);

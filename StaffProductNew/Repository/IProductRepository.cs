@@ -21,7 +21,7 @@ namespace StaffProductNew.Repository
         Task<Product> Update(Product product);
 
 
-        Task<IEnumerable<Product>> UpdateStock(StockDto StockChanges);
+        Task<IEnumerable<Product>> UpdateStock(IEnumerable<StockDto> StockChanges);
 
         Product Delete(int Id);
 

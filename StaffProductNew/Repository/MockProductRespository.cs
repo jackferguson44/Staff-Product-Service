@@ -87,24 +87,29 @@ namespace StaffProductNew.Repository
             return await Task.FromResult(product);
         }
 
-        async Task<IEnumerable<Product>> IProductRepository.UpdateStock(StockDto StockChanges)
+        //async Task<IEnumerable<Product>> IProductRepository.UpdateStock(StockDto StockChanges)
+        //{
+        //    var product = _productsList.Where(p => p.Id == StockChanges.ProductId);
+
+
+        //    foreach (var item in product)
+        //    {
+        //        item.Stock = item.Stock - StockChanges.StockAmount;
+
+        //        if (item.Stock == 0)
+        //        {
+        //            item.InStock = false;
+        //        }
+
+        //        _productsList.Append(item);
+        //    }
+
+        //    return await Task.FromResult(product);
+        //}
+
+        public Task<IEnumerable<Product>> UpdateStock(IEnumerable<StockDto> StockChanges)
         {
-            var product = _productsList.Where(p => p.Id == StockChanges.ProductId);
-
-
-            foreach (var item in product)
-            {
-                item.Stock = item.Stock - StockChanges.StockAmount;
-
-                if (item.Stock == 0)
-                {
-                    item.InStock = false;
-                }
-
-                _productsList.Append(item);
-            }
-
-            return await Task.FromResult(product);
+            throw new NotImplementedException();
         }
     }
 }
