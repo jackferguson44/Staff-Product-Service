@@ -1,15 +1,8 @@
-﻿using Newtonsoft.Json;
-using StaffProductNew.Data;
-using StaffProductNew.Repository;
-using System;
+﻿using StaffProductNew.Data;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using IdentityServer4;
-using IdentityModel;
 using IdentityModel.Client;
 
 namespace StaffProductNew.Services.CustomerOrderingService

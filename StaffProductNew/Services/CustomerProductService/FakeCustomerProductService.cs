@@ -1,5 +1,4 @@
 ﻿using StaffProductNew.Data;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,13 +17,6 @@ namespace StaffProductNew.Services.CustomerOrderingService
 
         public async Task<IEnumerable<CustomerProductDto>> UpdateStock(IEnumerable<Product> productChanges)
         {
-            //CustomerProductDto product = _products.FirstOrDefault(p => p.ProductId == productChanges.Id);
-            //product.Name = productChanges.Name;
-            //product.Quantity = productChanges.Stock;
-            //product.BrandId = productChanges.BrandId;
-            //product.CategoryId = productChanges.CategoryId;
-            //product.Price = productChanges.Price;
-            //return null; //Task.FromResult(product);
 
             var product = productChanges.Select(p => new CustomerProductDto
             {

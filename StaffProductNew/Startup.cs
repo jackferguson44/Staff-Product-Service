@@ -1,26 +1,18 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-//using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using StaffProductNew.Data;
-using StaffProductNew.Services;
-using StaffProductNew.Services.CustomerStockService;
 using StaffProductNew.Repository;
 using Microsoft.AspNetCore.Http;
 using StaffProductNew.Services.ProductService;
 using Polly;
 using System.IdentityModel.Tokens.Jwt;
 using StaffProductNew.Services.CustomerOrderingService;
-//using Jw
+
 namespace StaffProductNew
 {
     public class Startup
@@ -39,8 +31,6 @@ namespace StaffProductNew
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            //services.AddScoped<IProductService, ProductService>();
-            //services.AddScoped<IProductRepository, ProductRepository>();
 
             // do not use Microsoft claim mapping == stick with JWT names
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
@@ -84,17 +74,14 @@ namespace StaffProductNew
 
 
             services.AddRazorPages();
-            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
             if(_env.IsDevelopment())
             {
                 services.AddScoped<IProductService, ProductService>();
                 services.AddScoped<IProductRepository, ProductRepository>();
-                services.AddScoped<IStockService, FakeStockService>();
-                services.AddScoped<ICustomerProductService, FakeCustomerProductService>();
+                services.AddScoped<ICustomerProductService, CustomerProductService>();
             }
             else
             {
-                services.AddScoped<IStockService, StockService>();
                 services.AddScoped<IProductRepository, ProductRepository>();
                 services.AddScoped<IProductService, ProductService>();
                 services.AddScoped<ICustomerProductService, CustomerProductService>();
@@ -119,11 +106,10 @@ namespace StaffProductNew
             app.UseStaticFiles();
 
             app.UseRouting();
-           // app.UseAuthentication();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             
-            //app.UseMvc();
 
             app.UseEndpoints(endpoints =>
             {

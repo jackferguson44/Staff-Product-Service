@@ -16,50 +16,25 @@ namespace StaffProductNew.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+   // [Authorize]
     public class CustomerStockOrdersController : ControllerBase
     {
         private readonly ILogger _logger;
-        private readonly IStockService _stockService;
         private readonly IProductRepository _productRepository;
         private readonly ICustomerProductService _customerProductService;
         //Repo stuff
 
-        public CustomerStockOrdersController(ILogger<CustomerStockOrdersController> logger, IStockService stockService,
+        public CustomerStockOrdersController(ILogger<CustomerStockOrdersController> logger,
             IProductRepository productRepository, ICustomerProductService customerProductService)
         {
             _logger = logger;
-            _stockService = stockService;
             _productRepository = productRepository;
             _customerProductService = customerProductService;
         }
 
-
-        // GET: api/stocks/5
-        [HttpGet("{id}")]
-        //[Authorize]
-        public async Task<ActionResult<StockDto>> GetStock(int Id)
-        {
-            var stock = await _stockService.GetStockAsync(Id);
-            if (stock == null)
-            {
-                return NotFound();
-            }
-            return Ok(stock);
-        }
-
-        // GET: api/stocks
-        [HttpGet("")]
-        //[Authorize]
-        public async Task<ActionResult<IEnumerable<StockDto>>> GetStocks()
-        {
-            var stocks = await _stockService.GetStocksAsync();
-
-            return Ok(stocks);
-        }
-
         // PUT: api/stocks/1
         [HttpPut("")]
-        [Authorize]
+    
         public async Task <ActionResult<Product>> UpdateStock(IEnumerable<StockDto> stockChange)
         {
             var product = await _productRepository.UpdateStock(stockChange);

@@ -71,19 +71,11 @@ namespace StaffProductNew.Repository
         public async Task<IEnumerable<Product>> UpdateStock(IEnumerable<StockDto> StockChanges)
         {
             var product = _context.Products.Where(p => p.Id == StockChanges.FirstOrDefault().ProductId).ToList();
-
-
             int x = 0;
-
             foreach (var item in StockChanges)
             {
                 for (int i = 0; i == product.Count-1; i++)
                 {
-                    //if (product[x].Id > item.ProductId)
-                    //{
-                    //    x = 0;
-                    //    break;
-                    //}
                     if (product[x].Id.Equals(item.ProductId))
                     {
                         product[x].Stock = product[x].Stock - item.Quantity;
@@ -93,11 +85,6 @@ namespace StaffProductNew.Repository
                         }
                         x++;
                         i--;
-                        //if (product.Count() > x)
-                        //{
-                        //    break;
-                        //}
-                        //i--;
                         if (x + 1 > product.Count())
                         {
                             x = 0;
@@ -108,96 +95,6 @@ namespace StaffProductNew.Repository
             }
             await _context.SaveChangesAsync();
             return product;
-
-            //foreach(var item in StockChanges)
-            //{
-            //    product = _context.Products.Where(p => p.Id == StockChanges.FirstOrDefault().ProductId).ToList();
-            //    if(product[x].Id.Equals(item.ProductId))
-            //    {
-            //        product[x].Stock = product[x].Stock - item.StockAmount;
-            //    }
-
-            // }
-            // var produck = List(StockDto);
-            //var amount = StockChanges.Count();
-            //int x = 0;
-
-            //var product = _context.Products.Where(p => p.Id == StockChanges.FirstOrDefault().ProductId).ToList();
-            ////foreach (var item in StockChanges)
-            ////{
-            ////    foreach (var mc in product.Where(x => x.Id == item.ProductId))
-            ////    {
-            ////        mc.Stock = mc.Stock - item.StockAmount;
-            ////    }
-            ////}
-            ////product.Where(p => p.Id == item.ProductId).ToList().
-            ////{
-            ////}
-
-            //foreach(var item in StockChanges)
-            //{
-            //    for (int i = 0; i == product.Count - 1; i++)
-            //    {
-            //        //if(product[x].Id > item.ProductId)
-            //        //{
-            //        //    x = 0;
-            //        //    break;
-            //        //}
-            //        if (product[x].Id.Equals(item.ProductId))
-            //        {
-            //            // var stockChange = item;
-            //            product[x].Stock = product[x].Stock - item.StockAmount;
-            //            if (product[x].Stock == 0)
-            //            {
-            //                product[x].InStock = false;
-            //            }
-            //            x++;
-            //            if (product.Count() > x)
-            //            {
-            //                break;
-            //            }
-            //            //i--;
-            //            //if (x + 1 > product.Count())
-            //            //{
-            //            //    x = 0;
-            //            //    break;
-            //            //}
-            //        }
-            //    }
-            //}
-            //while(StockChanges.First().ProductId != StockChanges.Last().ProductId)
-            //{
-            //    foreach (var item in product)
-            //    {
-            //        item.Stock = item.Stock - StockChanges.First().StockAmount;
-            //        if (item.Stock == 0)
-            //        {
-            //            item.InStock = false;
-            //        }
-            //    }
-            //    //StockChanges.First().ProductId = StockChanges.;
-
-            //}
-
-
-            //product = _context.Products.Where(p => p.Id == StockChanges.First().ProductId).ToList();
-
-
-
-
-            //var product = _context.Products.Where(p => p.Id == StockChanges.First().ProductId).ToList();
-
-            //for()
-
-            //foreach(var item in product)
-            //{
-            //    item.Stock = item.Stock - StockChanges.StockAmount;
-
-            //    if (item.Stock == 0)
-            //    {
-            //        item.InStock = false;
-            //    }
-            //}
 
 
 
