@@ -1,5 +1,4 @@
 ﻿using StaffProductNew.Data;
-using StaffProductNew.Models;
 using StaffProductNew.Services.CustomerStockService;
 using System;
 using System.Collections.Generic;
@@ -22,24 +21,7 @@ namespace StaffProductNew.Repository
                 new Product() {Id = 2, Ean = "adsa", CategoryId = 2, BrandId = 2, Name = "soda", Price = 4.48m, InStock = true, ExpectedRestock = new DateTime(2020, 12, 25, 10, 30, 50), Stock = 15}
             };
         }
-        public Product Add(Product product)
-        {
-            product.Id = _productsList.Max(p => p.Id) + 1;
-            _productsList.Add(product);
-            return product;
-        }
 
-        public Product Delete(int Id)
-        {
-            Product product = _productsList.FirstOrDefault(p => p.Id == Id);
-            if(product != null)
-            {
-                _productsList.Remove(product);
-            }
-            return product;
-        }
-
-        //Update this
         public async Task<Product> Update(Product productChanges)
         {
             Product product = _productsList.FirstOrDefault(p => p.Id == productChanges.Id);
@@ -56,7 +38,6 @@ namespace StaffProductNew.Repository
             return await Task.FromResult(product);
         }
 
-
         public async Task<IEnumerable<Product>> GetProducts()
         {
             return await Task.FromResult(_productsList);
@@ -66,26 +47,6 @@ namespace StaffProductNew.Repository
         {
             return await Task.FromResult(_productsList.FirstOrDefault(p => p.Id == Id));
         }
-
-
-
-        public async Task<Product> PurchaseRequest(PurchaseRequestDto purchaseRequest)
-        {
-            Product product = _productsList.FirstOrDefault(p => p.Id == purchaseRequest.Id);
-
-            //if (product != null && product.Stock != 0)
-            //{
-            //    product.Ean = productChanges.Ean;
-            //    product.CategoryId = productChanges.CategoryId;
-            //    product.Name = productChanges.Name;
-            //    product.Price = productChanges.Price;
-            //    product.InStock = productChanges.InStock;
-            //    product.ExpectedRestock = productChanges.ExpectedRestock;
-            //    product.Stock = productChanges.Stock;
-            //}
-            return await Task.FromResult(product);
-        }
-
 
         public Task<IEnumerable<Product>> UpdateStock(IEnumerable<StockDto> StockChanges)
         {

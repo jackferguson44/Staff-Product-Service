@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using StaffProductNew.Data;
-using StaffProductNew.Models;
 using StaffProductNew.Repository;
 using StaffProductNew.Services;
 using StaffProductNew.Services.ProductService;
@@ -19,15 +18,13 @@ namespace StaffProductNew.Controllers
     //[Authorize]
     public class StaffProductController : ControllerBase
     {
-        //private readonly StaffProductDbContext _context;
         private readonly IProductRepository _productRepository;
         private readonly IProductService _productService;
 
-        public StaffProductController(IProductRepository productRepository, IProductService productService)//StaffProductDbContext context)
+        public StaffProductController(IProductRepository productRepository, IProductService productService)
         {
             _productRepository = productRepository;
             _productService = productService;
-            //_context = context;
         }
 
         // GET: api/products/5

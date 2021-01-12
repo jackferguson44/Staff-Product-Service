@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StaffProductNew.Data;
-using StaffProductNew.Models;
 using StaffProductNew.Services.CustomerStockService;
 using System;
 using System.Collections.Generic;
@@ -14,7 +13,7 @@ namespace StaffProductNew.Repository
     {
         private readonly StaffProductDbContext _context;
         private readonly ILogger<ProductRepository> _logger;
-       // private readonly
+
 
         public ProductRepository(StaffProductDbContext context, ILogger<ProductRepository> logger)
         {
@@ -22,33 +21,6 @@ namespace StaffProductNew.Repository
             _logger = logger;
         }
 
-        public Product Add(Product product)
-        {
-            _context.Products.Add(product);
-            _context.SaveChanges();
-            return product;
-        }
-
-        public Product Delete(int Id)
-        {
-           Product product = _context.Products.Find(Id);
-           if(product != null)
-            {
-                _context.Products.Remove(product);
-                _context.SaveChanges();
-            }
-            return product;
-        }
-
-        //public Product GetProduct(int Id)
-        //{
-        //   return _context.Products.Find(Id);
-        //}
-
-        //public IEnumerable<Product> GetProducts()
-        //{
-        //    return _context.Products;
-        //}
 
         public async Task<Product> Update(Product productChanges)
         {
@@ -60,12 +32,8 @@ namespace StaffProductNew.Repository
             product.InStock = productChanges.InStock;
             product.ExpectedRestock = productChanges.ExpectedRestock;
             product.Stock = productChanges.Stock;
-            //var product = _context.Products.Attach(productChanges);
-            //product.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            //_context.SaveChanges();
             await _context.SaveChangesAsync();
             return product;
-            //return await Task.FromResult(productChanges);
         }
 
         public async Task<IEnumerable<Product>> UpdateStock(IEnumerable<StockDto> StockChanges)
@@ -95,9 +63,6 @@ namespace StaffProductNew.Repository
             }
             await _context.SaveChangesAsync();
             return product;
-
-
-
         }
 
         public async Task<IEnumerable<Product>> GetProducts()
@@ -123,8 +88,7 @@ namespace StaffProductNew.Repository
             {
                 _logger.LogError("L" + e.StackTrace);
             }
-            return null;
-           
+            return null;  
         }
 
 
@@ -141,19 +105,7 @@ namespace StaffProductNew.Repository
                 _logger.LogError("Failed");
             }
             return null;
-           // return _context.Products.Find(Id);
-           // throw new NotImplementedException();
         }
-
-        public async Task<Product> PurchaseRequest(PurchaseRequestDto purchaseRequest)
-        {
-            //try
-            //{
-            //    await _context.Products
-            //}
-            return null;
-        }
-
         
     }
 }

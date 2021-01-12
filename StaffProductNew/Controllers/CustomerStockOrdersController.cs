@@ -16,13 +16,12 @@ namespace StaffProductNew.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-   // [Authorize]
+    //[Authorize]
     public class CustomerStockOrdersController : ControllerBase
     {
         private readonly ILogger _logger;
         private readonly IProductRepository _productRepository;
         private readonly ICustomerProductService _customerProductService;
-        //Repo stuff
 
         public CustomerStockOrdersController(ILogger<CustomerStockOrdersController> logger,
             IProductRepository productRepository, ICustomerProductService customerProductService)

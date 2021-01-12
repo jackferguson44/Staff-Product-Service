@@ -32,7 +32,6 @@ namespace StaffProductNew
         {
             services.AddControllers();
 
-            // do not use Microsoft claim mapping == stick with JWT names
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
             if (_env.IsDevelopment())
@@ -102,7 +101,6 @@ namespace StaffProductNew
             }
 
             app.UseHttpsRedirection();
-            // use auth middleware during HTTP requests
             app.UseStaticFiles();
 
             app.UseRouting();

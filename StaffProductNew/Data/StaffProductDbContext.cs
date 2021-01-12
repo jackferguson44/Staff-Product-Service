@@ -71,13 +71,6 @@ namespace StaffProductNew.Data
                         new CustomerStockOrder { Id = 1, ProductId = 1, ProductName = "tasty chicken", Quantity = 2}
                 );
 
-            modelBuilder.Entity<PurchaseRequestStockOrder>()
-                .HasKey(p => p.Id);
-
-            modelBuilder.Entity<PurchaseRequestStockOrder>()
-                .HasData(
-                            new PurchaseRequestStockOrder { Id = 1, ProductId = 1, ProductName = "tasty chicken", Quantity = 2 }
-                );
         }
 
     }

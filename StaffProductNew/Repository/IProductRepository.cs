@@ -1,5 +1,4 @@
 ﻿using StaffProductNew.Data;
-using StaffProductNew.Models;
 using StaffProductNew.Services.CustomerStockService;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -13,19 +12,12 @@ namespace StaffProductNew.Repository
 
         Task<Product> GetProduct(int Id);
 
-        Product Add(Product product);
 
         Task<Product> Update(Product product);
 
 
         Task<IEnumerable<Product>> UpdateStock(IEnumerable<StockDto> StockChanges);
 
-        Product Delete(int Id);
-
-        
-
-        //Sends purchase request
-        Task<Product> PurchaseRequest(PurchaseRequestDto purchaseRequest);
 
 
     }

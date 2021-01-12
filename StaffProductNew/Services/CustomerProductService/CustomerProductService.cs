@@ -9,15 +9,10 @@ namespace StaffProductNew.Services.CustomerOrderingService
 {
     public class CustomerProductService : ICustomerProductService
     {
-        //private readonly IProductRepository _productRepository;
         private readonly IHttpClientFactory _clientFactory;
 
-        public CustomerProductService(IHttpClientFactory clientFactory) //IProductRepository productRepository
+        public CustomerProductService(IHttpClientFactory clientFactory)
         {
-           // _productRepository = productRepository;
-            //client.BaseAddress = new System.Uri("http://localhost:44357");
-            //client.Timeout = TimeSpan.FromSeconds(5);
-            //client.DefaultRequestHeaders.Add("Accept", "application/json");
             _clientFactory = clientFactory;
         }
 
