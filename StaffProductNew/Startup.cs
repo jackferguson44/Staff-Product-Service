@@ -77,7 +77,7 @@ namespace StaffProductNew
             if(_env.IsDevelopment())
             {
                 services.AddScoped<IProductService, ProductService>();
-                services.AddScoped<IProductRepository, MockProductRespository>();
+                services.AddScoped<IProductRepository, ProductRepository>();
                 services.AddScoped<ICustomerProductService, FakeCustomerProductService>();
             }
             else
