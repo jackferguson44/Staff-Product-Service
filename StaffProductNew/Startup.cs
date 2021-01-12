@@ -104,7 +104,7 @@ namespace StaffProductNew
             app.UseStaticFiles();
 
             app.UseRouting();
-            app.UseAuthentication();
+          //  app.UseAuthentication();
             app.UseAuthorization();
 
             
