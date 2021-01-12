@@ -58,7 +58,7 @@ namespace StaffProductNew.Testing
         }
 
         [TestMethod]
-        public async Task GetProducts_ShouldOkObject()
+        public async Task GetProducts_ShouldOkObjects()
         {
             _mockProductService = new Mock<IProductService>();
             _mockProductRepository = new Mock<IProductRepository>();
