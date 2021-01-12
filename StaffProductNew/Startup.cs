@@ -90,7 +90,7 @@ namespace StaffProductNew
                 services.AddScoped<IProductService, ProductService>();
                 services.AddScoped<IProductRepository, ProductRepository>();
                 services.AddScoped<IStockService, FakeStockService>();
-                services.AddScoped<ICustomerProductService, CustomerProductService>();
+                services.AddScoped<ICustomerProductService, FakeCustomerProductService>();
             }
             else
             {
