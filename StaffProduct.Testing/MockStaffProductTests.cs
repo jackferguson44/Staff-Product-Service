@@ -61,6 +61,10 @@ namespace StaffProductNew.Testing
         [TestMethod]
         public async Task GetProducts_ShouldOkObject()
         {
+            _mockProductService = new Mock<IProductService>();
+            _mockProductRepository = new Mock<IProductRepository>();
+            _staffProductController = new StaffProductController(_mockProductRepository.Object, _mockProductService.Object);
+
             //Arrange
             var products = new List<Product>()
              {
@@ -69,39 +73,20 @@ namespace StaffProductNew.Testing
                  new Product {Id = 2, Ean = "Ean", CategoryId = 2, BrandId = 2, Name = "chip", Price = 22m, InStock = true,
                                  ExpectedRestock = new DateTime(2020, 12, 25, 10, 30, 50), Stock = 300 }
              };
-            var mock = new Mock<IProductRepository>(MockBehavior.Strict);
-            mock.Setup(repo => repo.GetProducts()).ReturnsAsync(products).Verifiable();
-            var mockTwo = new Mock<IProductService>(MockBehavior.Strict);
-            mockTwo.Setup(service => service.GetProductsAsync()).ReturnsAsync(products).Verifiable();
-            var controller = new StaffProductController(mock.Object, mockTwo.Object);
+
+            _mockProductService.Setup(g => g.GetProductsAsync()).ReturnsAsync(products);
 
             //Act
-            var result = await controller.GetProducts();
+            var result = await _staffProductController.GetProducts() as OkObjectResult;
 
             //Assert
-            Assert.IsNotNull(result);
-            var objResult = result as OkObjectResult;
-            Assert.IsNotNull(objResult);
-            var productResult = objResult.Value as IEnumerable<Product>;
-            Assert.IsNotNull(productResult);
-            var productResultList = productResult.ToList();
-            Assert.AreEqual(products.Count, productResultList.Count);
-            for (int i = 0; i < products.Count; i++)
-            {
-                Assert.AreEqual(products[i].Id, productResultList[i].Id);
-                Assert.AreEqual(products[i].Ean, productResultList[i].Ean);
-                Assert.AreEqual(products[i].CategoryId, productResultList[i].CategoryId);
-                Assert.AreEqual(products[i].BrandId, productResultList[i].BrandId);
-                Assert.AreEqual(products[i].Name, productResultList[i].Name);
-                Assert.AreEqual(products[i].Price, productResultList[i].Price);
-                Assert.AreEqual(products[i].InStock, productResultList[i].InStock);
-                Assert.AreEqual(products[i].ExpectedRestock, productResultList[i].ExpectedRestock);
-                Assert.AreEqual(products[i].Price, productResultList[i].Price);
-            }
-            //fails 
-            // mock.Verify();
-            //// mock.Verify(repo => repo.GetProducts(), Times.Once);
+            NUnit.Framework.Assert.IsNotNull(result);
+            NUnit.Framework.Assert.AreEqual(result.StatusCode, 200);
+            NUnit.Framework.Assert.AreEqual(result.Value, products);
+            _mockProductService.Verify(m => m.GetProductsAsync(), Times.Once);
         }
+
+
 
     }
 }
